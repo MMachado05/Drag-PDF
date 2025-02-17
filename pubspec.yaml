@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   cunning_document_scanner: ^1.2.3
   easy_image_viewer: ^1.5.1
-  file_picker: ^8.3.3
+  file_picker: ^9.0.0
   firebase_core: ^3.10.1
   firebase_analytics: ^11.4.2
   firebase_crashlytics: ^4.3.2
@@ -48,7 +48,7 @@ dependencies:
   image_picker: ^1.1.2
   lottie: ^3.3.1
   path_provider: ^2.1.5
-  pdf: ^3.11.2
+  pdf: ^3.11.3
   pdf_combiner: ^3.0.4
   pdfx: ^2.6.0
   platform_detail: ^4.1.0
