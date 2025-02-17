@@ -625,10 +625,10 @@ packages:
     dependency: "direct main"
     description:
       name: pdf_combiner
-      sha256: "92a9db746bb8c62d4c1cf3e60197a56c4009081d9c45e9738b5e4569986e005e"
+      sha256: "3eda98a4f0db606679c8106f53a960bdd65c49835bbc600954c89c1b454b46a6"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "3.0.4"
   pdfx:
     dependency: "direct main"
     description:
