@@ -47,7 +47,3 @@ app.*.map.json
 
 # Secure INF
 *.env
-**/firebase_app_id_file.json
-**/app/google-services.json
-**/Runner/GoogleService-Info.plist
-/ios/GoogleService-Info.plist
