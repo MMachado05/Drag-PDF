@@ -58,6 +58,12 @@ flutter_icons:
   android: true
   ios: true
   remove_alpha_ios: true
+  linux:
+    generate: true
+    image_path: "assets/icons/ios-icon.png"
+  macos:
+    generate: true
+    image_path: "assets/icons/ios-icon.png"
   windows:
     generate: true
     image_path: "assets/icons/ios-icon.png"
