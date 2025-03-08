@@ -6,9 +6,9 @@ import 'package:drag_pdf/components/components.dart';
 import 'package:drag_pdf/model/enums/loader_of.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../helper/dialogs/custom_dialog.dart';
-import '../../helper/helpers.dart';
-import '../../view_model/home_view_model.dart';
+import '../helper/dialogs/custom_dialog.dart';
+import '../helper/helpers.dart';
+import '../view_model/home_view_model.dart';
 
 class HomeScreenMobile extends StatefulWidget {
   const HomeScreenMobile({super.key});

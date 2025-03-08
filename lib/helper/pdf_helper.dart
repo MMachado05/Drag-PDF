@@ -4,7 +4,6 @@ import 'package:drag_pdf/helper/file_manager.dart';
 import 'package:pdf_combiner/pdf_combiner.dart';
 import 'package:pdf_combiner/responses/merge_multiple_pdf_response.dart';
 import 'package:pdf_combiner/responses/pdf_combiner_status.dart';
-import 'package:pdf_combiner/responses/pdf_from_multiple_image_response.dart';
 
 import '../model/file_read.dart';
 
@@ -21,21 +20,19 @@ class PDFHelper {
   static Future<FileRead?> createPdfFromImage(
       FileRead imageFile, String outputPath, String nameOutputFile) async {
     // Request PDF creation from the image file using PdfCombiner.
-    PdfFromMultipleImageResponse response =
-        await PdfCombiner.createPDFFromMultipleImages(
-            inputPaths: [imageFile.getFile().path],
-            outputPath: outputPath,
-            needImageCompressor: false);
+    final response = await PdfCombiner.createPDFFromMultipleImages(
+        inputPaths: [imageFile.getFile().path], outputPath: outputPath);
 
     // If the operation was successful, return a FileRead instance for the PDF.
-    if (response.status == PdfCombinerStatus.success) {
-      File intermediateFile = File(response.response!);
-      final size = await intermediateFile.length();
-      return FileRead(intermediateFile, nameOutputFile.removeExtension(), null, size, "pdf");
+    switch (response.status) {
+      case PdfCombinerStatus.success:
+        File intermediateFile = File(response.outputPath);
+        final size = await intermediateFile.length();
+        return FileRead(intermediateFile, nameOutputFile.removeExtension(),
+            null, size, "pdf");
+      case PdfCombinerStatus.error:
+        throw Exception(response.message);
     }
-
-    // Throw an exception if PDF creation fails.
-    throw Exception('Cannot be generated PDF Document');
   }
 
   /// Copies an existing PDF file to a new location with a specified name.
@@ -67,13 +64,14 @@ class PDFHelper {
         inputPaths: paths, outputPath: outputPath);
 
     // If the operation was successful, return a FileRead instance for the merged PDF.
-    if (response.status == PdfCombinerStatus.success) {
-      File intermediateFile = File(response.response!);
-      final size = await intermediateFile.length();
-      return FileRead(intermediateFile, nameOutputFile.removeExtension(), null, size, "pdf");
+    switch (response.status) {
+      case PdfCombinerStatus.success:
+        File intermediateFile = File(response.outputPath);
+        final size = await intermediateFile.length();
+        return FileRead(intermediateFile, nameOutputFile.removeExtension(),
+            null, size, "pdf");
+      case PdfCombinerStatus.error:
+        throw Exception(response.message);
     }
-
-    // Throw an exception if merging fails.
-    throw Exception('Cannot be generated PDF Document');
   }
 }
