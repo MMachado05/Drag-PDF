@@ -1,9 +1,13 @@
+import 'dart:io';
+
+import 'package:desktop_drop/desktop_drop.dart';
 import 'package:drag_pdf/helper/file_manager.dart';
 import 'package:drag_pdf/helper/helpers.dart';
 import 'package:drag_pdf/model/enums/supported_file_type.dart';
 import 'package:drag_pdf/model/file_read.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as p;
 
 class HomeViewModel {
   final FileManager _mfl = AppSession.singleton.mfl;
@@ -21,7 +25,27 @@ class HomeViewModel {
       allowedExtensions: allowedExtensions,
     );
     _checkExtensionsFromPickFiles(result);
-    _mfl.addMultipleFiles(result?.files ?? [], _mfl.fileHelper.localPath);
+    _mfl.addMultiplePlatformFiles(
+        result?.files ?? [], _mfl.fileHelper.localPath);
+  }
+
+  Future<void> addFilesFromDragAndDrop(List<DropItem> files) async {
+    _checkExtensionsFromDropItem(files);
+    final files2 = files.map((e) => File(e.path)).toList();
+    _mfl.addMultipleFiles(files2, _mfl.fileHelper.localPath);
+  }
+
+  void _checkExtensionsFromDropItem(List<DropItem> files) {
+    for (DropItem file in files) {
+      final extension = p.extension(file.path);
+      if (!SupportedFileTypeExtension.namesOfSupportedType()
+          .contains(extension)) {
+        print(
+            "La extension $extension no es contenido en ${SupportedFileTypeExtension.namesOfSupportedType()}");
+        invalidFormat = extension;
+        throw Exception(extensionForbidden + invalidFormat);
+      }
+    }
   }
 
   void _checkExtensionsFromPickFiles(FilePickerResult? result) {

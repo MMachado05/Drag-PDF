@@ -62,16 +62,15 @@ class Utils {
   }
 
   static bool isFinalFile(FileRead file) =>
-      file.getName() == Utils.nameOfFinalFile;
+      Utils.nameOfFinalFile.contains(file.getName());
 
   static void openFileProperly(BuildContext context, FileRead file) {
     switch (file.getExtensionType()) {
       case SupportedFileType.pdf:
         Utils.printInDebug("Opened PDF file: ${file.getFile().path}");
-
         isFinalFile(file)
-            ? context.go("/home/preview_document_screen", extra: file)
-            : context.go("/home/pdf_viewer_screen", extra: file);
+            ? context.go("/preview_document_screen", extra: file)
+            : context.go("/pdf_viewer_screen", extra: file);
         break;
       case SupportedFileType.png:
         _openImage(context, file);

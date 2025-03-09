@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 import '../model/enums/supported_file_type.dart';
+
 extension FileNameExtension on String {
   /// Elimina la extensión de un nombre de archivo.
   /// Si no hay extensión, devuelve el string original.
@@ -25,6 +26,7 @@ extension FileNameExtension on String {
     return substring(0, lastDotIndex);
   }
 }
+
 class FileManager {
   final List<FileRead> _filesInMemory = [];
   final FileHelper fileHelper;
@@ -68,7 +70,17 @@ class FileManager {
 
   int numberOfFiles() => _filesInMemory.length;
 
-  List<FileRead> addMultipleFiles(List<PlatformFile> files, String localPath) {
+  List<FileRead> addMultipleFiles(List<File> files, String localPath) {
+    for (File file in files) {
+      final fileRead = FileRead(file, _nameOfNextFile(), null,
+          file.lengthSync(), file.path.split('.').last);
+      _addSingleFile(fileRead, localPath);
+    }
+    return _filesInMemory;
+  }
+
+  List<FileRead> addMultiplePlatformFiles(
+      List<PlatformFile> files, String localPath) {
     for (PlatformFile file in files) {
       final fileRead = FileRead(File(file.path!), _nameOfNextFile(), null,
           file.size, file.extension?.toLowerCase() ?? "");

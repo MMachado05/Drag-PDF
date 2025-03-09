@@ -3,10 +3,9 @@ import 'package:drag_pdf/model/file_read.dart';
 import 'package:drag_pdf/view/create_signature_screen.dart';
 import 'package:go_router/go_router.dart';
 
-import '../view/home_screen_mobile.dart';
+import '../view/home_screen.dart';
 import '../view/pdf_viewer_screen.dart';
 import '../view/preview_document_screen.dart';
-import '../view/splash_screen.dart';
 
 class AppRouter {
   late final GoRouter _routes;
@@ -24,12 +23,8 @@ class AppRouter {
     return GoRouter(
       routes: [
         GoRoute(
-          path: '/',
-          builder: (context, state) => const SplashScreen(),
-        ),
-        GoRoute(
-            path: '/home',
-            builder: (context, state) => const HomeScreenMobile(),
+            path: '/',
+            builder: (context, state) => const HomeScreen(),
             routes: [
               GoRoute(
                   path: 'preview_document_screen',

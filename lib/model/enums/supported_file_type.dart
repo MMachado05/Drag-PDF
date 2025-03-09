@@ -18,6 +18,9 @@ extension SupportedFileTypeExtension on SupportedFileType {
   static List<String> namesOfSupportedExtension() =>
       SupportedFileType.values.map((e) => e.name).toList();
 
+  static List<String> namesOfSupportedType() =>
+      SupportedFileType.values.map((e) => ".${e.name}").toList();
+
   static SupportedFileType fromString(String text) =>
       SupportedFileType.values.firstWhere((element) => element.name == text);
 }
