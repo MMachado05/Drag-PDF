@@ -56,5 +56,6 @@
   "signature_screen_redo_tooltip": "Redo a step",
   "signature_screen_undo_tooltip": "Undo a step",
   "signature_screen_clear_tooltip": "Clear signature",
-  "file_saved_toast": "File Saved!"
+  "file_saved_toast": "File Saved!",
+  "app_restart_toast": "App Restart!"
 }

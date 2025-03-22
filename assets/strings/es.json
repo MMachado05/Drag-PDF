@@ -56,5 +56,6 @@
     "signature_screen_redo_tooltip": "Rehacer un paso",
     "signature_screen_undo_tooltip": "Deshacer un paso",
     "signature_screen_clear_tooltip": "Borrar firma",
-    "file_saved_toast": "¡Fichero Guardado!"
+    "file_saved_toast": "¡Fichero Guardado!",
+    "app_restart_toast": "¡Reinicio de la aplicación!"
 }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
+import '../common/service_locator.dart';
 import '../helper/dialogs/custom_dialog.dart';
 import '../helper/helpers.dart';
 import '../view_model/home_view_model.dart';
@@ -153,16 +154,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             key: Key("${file.hashCode}"),
                             direction: DismissDirection.endToStart,
                             onDismissed: (direction) async {
-                              viewModel.removeFileFromDisk(position);
                               setState(() {
-                                // Then show a snackbar.
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                        '${Localization.of(context).string('removed_toast')} ${file.getName()}'),
-                                  ),
-                                );
+                                viewModel.removeFileFromDisk(position);
                               });
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                      '${Localization.of(context).string('removed_toast')} ${file.getName()}'),
+                                ),
+                              );
                             },
                             background: Container(
                               color: Colors.red,
@@ -247,11 +247,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     });
                     try {
                       final file = await viewModel.generatePreviewPdfDocument();
-                      setState(() {
-                        Utils.openFileProperly(context, file);
-                      });
+                      ServiceLocator.instance.registerFile(file);
+                      if (!context.mounted) return;
+                      final wasRestarted =
+                          await context.push("/preview_document_screen");
+                      if (wasRestarted != null) {
+                        setState(() {
+                          viewModel.restartApp();
+                        });
+                        if (!context.mounted) return;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(Localization.of(context)
+                                .string('app_restart_toast')),
+                          ),
+                        );
+                      }
                     } catch (error) {
-                      if (!context.mounted) return; // check "mounted" property
+                      if (!context.mounted) return;
                       CustomDialog.showError(
                         context: context,
                         error: error,

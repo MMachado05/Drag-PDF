@@ -111,4 +111,8 @@ class HomeViewModel {
     return await _mfl.generatePreviewPdfDocument(
         pathFinal, Utils.nameOfFinalFile);
   }
+
+  void restartApp() {
+    AppSession.singleton.resetApp();
+  }
 }
