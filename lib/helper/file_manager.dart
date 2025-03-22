@@ -7,9 +7,8 @@ import 'package:drag_pdf/model/file_read.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:image/image.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as path;
 import 'package:pdf/widgets.dart' as pw;
-
-import '../model/enums/supported_file_type.dart';
 
 extension FileNameExtension on String {
   /// Elimina la extensión de un nombre de archivo.
@@ -151,9 +150,7 @@ class FileManager {
         );
 
         pdf.addPage(pw.Page(build: (pw.Context context) {
-          return pw.Center(
-            child: pw.Image(image),
-          );
+          return pw.Image(image);
         }));
       }
       file = File('${fileHelper.localPath}${_nameOfNextFile()}');
@@ -174,25 +171,9 @@ class FileManager {
   /// Returns a [FileRead] object representing the merged PDF document.
   Future<FileRead> generatePreviewPdfDocument(
       String outputPath, String nameOutputFile) async {
-    List<String> intermediateFiles = [];
-    for (FileRead file in _filesInMemory) {
-      final FileRead? intermediate;
-
-      switch (file.getExtensionType()) {
-        case SupportedFileType.pdf:
-          intermediate = await PDFHelper.createPdfFromOtherPdf(
-              file, '${file.getFile().path}.pdf', '${file.getName()}.pdf');
-        case SupportedFileType.png:
-        case SupportedFileType.jpg:
-        case SupportedFileType.jpeg:
-          intermediate = await PDFHelper.createPdfFromImage(
-              file, '${file.getFile().path}.pdf', '${file.getName()}.pdf');
-      }
-      intermediateFiles.add(intermediate!.getFile().path);
-    }
-    FileRead fileRead = await PDFHelper.mergePdfDocuments(
-        intermediateFiles, outputPath, nameOutputFile);
-    return fileRead;
+    List<String> files = _filesInMemory.map((e) => e.getFile().path).toList();
+    return await PDFHelper.createPdfDocuments(
+        files, outputPath, nameOutputFile);
   }
 
   @override

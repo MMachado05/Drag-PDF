@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:drag_pdf/helper/file_manager.dart';
 import 'package:pdf_combiner/pdf_combiner.dart';
+import 'package:pdf_combiner/responses/generate_pdf_from_documents_response.dart';
 import 'package:pdf_combiner/responses/merge_multiple_pdf_response.dart';
 import 'package:pdf_combiner/responses/pdf_combiner_status.dart';
 
@@ -62,6 +63,33 @@ class PDFHelper {
     // Request merging of multiple PDFs using PdfCombiner.
     MergeMultiplePDFResponse response = await PdfCombiner.mergeMultiplePDFs(
         inputPaths: paths, outputPath: outputPath);
+
+    // If the operation was successful, return a FileRead instance for the merged PDF.
+    switch (response.status) {
+      case PdfCombinerStatus.success:
+        File intermediateFile = File(response.outputPath);
+        final size = await intermediateFile.length();
+        return FileRead(intermediateFile, nameOutputFile.removeExtension(),
+            null, size, "pdf");
+      case PdfCombinerStatus.error:
+        throw Exception(response.message);
+    }
+  }
+
+  /// Create multiple PDF documents into a single PDF file.
+  ///
+  /// - [paths]: A list of file paths to the PDFs to merge.
+  /// - [outputPath]: The directory where the merged PDF will be saved.
+  /// - [nameOutputFile]: The desired name of the merged PDF file.
+  ///
+  /// Returns a [FileRead] object representing the merged PDF, or throws an exception
+  /// if the merge operation fails.
+  static Future<FileRead> createPdfDocuments(
+      List<String> paths, String outputPath, String nameOutputFile) async {
+    // Request merging of multiple PDFs using PdfCombiner.
+    GeneratePdfFromDocumentsResponse response =
+        await PdfCombiner.generatePDFFromDocuments(
+            inputPaths: paths, outputPath: outputPath);
 
     // If the operation was successful, return a FileRead instance for the merged PDF.
     switch (response.status) {

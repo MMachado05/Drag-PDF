@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:image/image.dart';
 import 'package:drag_pdf/helper/helpers.dart';
 import 'package:drag_pdf/model/models.dart';
+import 'package:image/image.dart';
 import 'package:path_provider/path_provider.dart';
 
 class FileHelper {
@@ -17,7 +17,8 @@ class FileHelper {
   }
 
   FileRead saveFileInLocalPath(FileRead file, String localPath) {
-    File newFile = File('$localPath${file.getName()}.${file.getExtensionName()}');
+    File newFile =
+        File('$localPath${file.getName()}.${file.getExtensionName()}');
     newFile.writeAsBytesSync(file.getFile().readAsBytesSync());
     Image? image;
     if (Utils.isImage(file)) {
