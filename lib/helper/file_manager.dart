@@ -7,7 +7,6 @@ import 'package:drag_pdf/model/file_read.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:image/image.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart' as path;
 import 'package:pdf/widgets.dart' as pw;
 
 extension FileNameExtension on String {
