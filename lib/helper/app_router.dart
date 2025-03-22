@@ -3,6 +3,7 @@ import 'package:drag_pdf/model/file_read.dart';
 import 'package:drag_pdf/view/create_signature_screen.dart';
 import 'package:go_router/go_router.dart';
 
+import '../common/service_locator.dart';
 import '../view/home_screen.dart';
 import '../view/pdf_viewer_screen.dart';
 import '../view/preview_document_screen.dart';
@@ -28,8 +29,8 @@ class AppRouter {
             routes: [
               GoRoute(
                   path: 'preview_document_screen',
-                  builder: (context, state) =>
-                      PreviewDocumentScreen(file: state.extra as FileRead),
+                  builder: (context, state) => PreviewDocumentScreen(
+                      file: ServiceLocator.instance.getIt<FileRead>()),
                   routes: [
                     GoRoute(
                       path: 'create_signature_screen',
@@ -39,8 +40,8 @@ class AppRouter {
                   ]),
               GoRoute(
                 path: 'pdf_viewer_screen',
-                builder: (context, state) =>
-                    PDFViewerScreen(file: state.extra as FileRead),
+                builder: (context, state) => PDFViewerScreen(
+                    file: ServiceLocator.instance.getIt<FileRead>()),
               ),
             ]),
         GoRoute(

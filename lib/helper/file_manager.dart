@@ -51,6 +51,8 @@ class FileManager {
     return _filesInMemory.removeAt(index);
   }
 
+  void reset() => _filesInMemory.clear();
+
   bool isNameUsedInOtherLoadedFile(String name) =>
       _filesInMemory.indexWhere((element) => element.getName() == name) != -1;
 

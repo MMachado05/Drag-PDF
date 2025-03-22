@@ -7,4 +7,9 @@ class AppSession {
   FileHelper fileHelper = FileHelper.singleton;
   FileManager mfl = FileManager(FileHelper.singleton);
   bool loading = false;
+
+  void resetApp() {
+    mfl.reset();
+    fileHelper.emptyLocalDocumentFolder();
+  }
 }
