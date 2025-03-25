@@ -44,6 +44,8 @@ dependencies:
   open_file: ^3.5.10
   platform_detail: ^4.2.0
   pdf_combiner: ^4.3.0
+  image_picker: ^1.0.7
+  cunning_document_scanner: ^1.2.3
 
 dev_dependencies:
   flutter_test:
