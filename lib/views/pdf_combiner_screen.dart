@@ -1,15 +1,14 @@
-import 'dart:io';
-
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:drag_pdf/utils/uint8list_extension.dart';
 import 'package:drag_pdf/views/widgets/file_type_icon.dart';
 import 'package:file_magic_number/file_magic_number.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path/path.dart' as p;
 import 'package:pdf_combiner/pdf_combiner_delegate.dart';
+import 'package:platform_detail/platform_detail.dart';
 
 import '../dialogs/customDialogs.dart';
 import '../view_models/pdf_combiner_view_model.dart';
@@ -61,13 +60,17 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
             tooltip: "Restart app",
           ),
           IconButton(
-            onPressed:() =>
-                showFilePickerDialog(context, (FilePickerResult? result) {
-                  _pickFiles(result);
+              onPressed: () =>
+              {
+                if(PlatformDetail.isAndroid || PlatformDetail.isIOS){
+                  showFilePickerDialog(context, (FilePickerResult? result) {
+                    _pickFiles(result: result);
+                  }),
+                } else
+                  _pickFiles()
               },
-            ),
-            icon: const Icon(Icons.add),
-            tooltip: "Add new files",
+              icon: const Icon(Icons.add),
+              tooltip: "Add new files",
           ),
         ],
       ),
@@ -274,7 +277,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
       _viewModel.outputFiles.length <= _viewModel.selectedFiles.length ? 1 : 2;
 
   // Function to pick PDF files from the device
-  Future<void> _pickFiles(FilePickerResult? result) async {
+  Future<void> _pickFiles({FilePickerResult? result}) async {
     await _viewModel.pickFiles(result);
     setState(() {});
   }

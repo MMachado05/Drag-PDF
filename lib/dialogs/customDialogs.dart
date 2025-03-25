@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cunning_document_scanner/cunning_document_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:platform_detail/platform_detail.dart';
 
 Future<void> showFilePickerDialog(BuildContext context, Function(FilePickerResult?) onFilesPicked) async {
   return showDialog(
