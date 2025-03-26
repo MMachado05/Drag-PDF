@@ -63,7 +63,8 @@ Future<void> showFilePickerWithTypeFileDialog(BuildContext context, Function(Fil
             onPressed: () async {
               Navigator.pop(context);
               FilePickerResult? result = await FilePicker.platform.pickFiles(
-                type: FileType.any,
+                type: FileType.custom,
+                allowedExtensions: ['pdf'],
                 allowMultiple: true,
               );
               onFilesPicked(result);
