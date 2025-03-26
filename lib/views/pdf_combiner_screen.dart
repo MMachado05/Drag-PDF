@@ -63,7 +63,9 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
               {
                 if(PlatformDetail.isAndroid || PlatformDetail.isIOS){
                   showFilePickerDialog(context, (FilePickerResult? result) {
-                    _pickFiles(result: result);
+                    if(result != null){
+                      _pickFiles(result: result);
+                    }
                   }),
                 } else
                   _pickFiles()
