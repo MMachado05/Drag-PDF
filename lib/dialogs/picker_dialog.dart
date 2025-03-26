@@ -15,13 +15,9 @@ Future<void> showFilePickerDialog(BuildContext context, Function(FilePickerResul
           TextButton(
             onPressed: () async {
               Navigator.pop(context);
-              FilePickerResult? result = await FilePicker.platform.pickFiles(
-                type: FileType.image,
-                allowMultiple: true,
-              );
-              onFilesPicked(result);
+              showFilePickerWithTypeFileDialog(context, onFilesPicked);
             },
-            child: Text("Select from Device"),
+            child: Text(style: TextStyle(color: Colors.white),"Select from Device"),
           ),
           TextButton(
             onPressed: () async {
@@ -32,13 +28,53 @@ Future<void> showFilePickerDialog(BuildContext context, Function(FilePickerResul
                 onFilesPicked(result);
               }
             },
-            child: Text("Scan Document"),
+            child: Text(style: TextStyle(color: Colors.white),"Scan Document"),
           ),
           TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text("Cancel"),
+            child: Text(style: TextStyle(color: Colors.white),"Cancel"),
+          ),
+        ],
+      );
+    },
+  );
+}
+Future<void> showFilePickerWithTypeFileDialog(BuildContext context, Function(FilePickerResult?) onFilesPicked) async {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text("What type of file do you want to upload?"),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(context);
+              FilePickerResult? result = await FilePicker.platform.pickFiles(
+                type: FileType.image,
+                allowMultiple: true,
+              );
+              onFilesPicked(result);
+            },
+            child: Text(style: TextStyle(color: Colors.white),"Select images"),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(context);
+              FilePickerResult? result = await FilePicker.platform.pickFiles(
+                type: FileType.any,
+                allowMultiple: true,
+              );
+              onFilesPicked(result);
+            },
+            child: Text(style: TextStyle(color: Colors.white),"Select documents"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("Cancel",style: TextStyle(color: Colors.white)),
           ),
         ],
       );
