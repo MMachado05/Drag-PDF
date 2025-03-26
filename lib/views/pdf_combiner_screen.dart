@@ -1,5 +1,6 @@
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:drag_pdf/utils/uint8list_extension.dart';
+import 'package:drag_pdf/views/components/loading.dart';
 import 'package:drag_pdf/views/widgets/file_type_icon.dart';
 import 'package:file_magic_number/file_magic_number.dart';
 import 'package:file_picker/file_picker.dart';
@@ -77,9 +78,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
       ),
       body: SafeArea(
         child: isLoading()
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
+            ? const LoadingScreen()
             : DropTarget(
                 onDragDone: (details) {
                   setState(() {
