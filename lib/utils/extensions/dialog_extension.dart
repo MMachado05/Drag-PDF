@@ -20,10 +20,7 @@ extension DialogExtension on BuildContext {
                 Navigator.pop(context);
                 context.showFilePickerWithTypeFileDialog(onFilesPicked);
               },
-              child: Text(
-                style: TextStyle(color: Colors.white),
-                "Select from Device",
-              ),
+              child: Text("Select from Device"),
             ),
             TextButton(
               onPressed: () async {
@@ -34,16 +31,13 @@ extension DialogExtension on BuildContext {
                   onFilesPicked(result);
                 }
               },
-              child: Text(
-                style: TextStyle(color: Colors.white),
-                "Scan Document",
-              ),
+              child: Text("Scan Document"),
             ),
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text(style: TextStyle(color: Colors.white), "Cancel"),
+              child: Text("Cancel"),
             ),
           ],
         );
@@ -58,7 +52,7 @@ extension DialogExtension on BuildContext {
       context: this,
       builder: (context) {
         return AlertDialog(
-          title: Text("What type of file do you want to upload?"),
+          title: Text("What type of file do you want to load?"),
           actions: [
             TextButton(
               onPressed: () async {
@@ -69,10 +63,7 @@ extension DialogExtension on BuildContext {
                 );
                 onFilesPicked(result);
               },
-              child: Text(
-                style: TextStyle(color: Colors.white),
-                "Select images",
-              ),
+              child: Text("Images"),
             ),
             TextButton(
               onPressed: () async {
@@ -84,16 +75,13 @@ extension DialogExtension on BuildContext {
                 );
                 onFilesPicked(result);
               },
-              child: Text(
-                style: TextStyle(color: Colors.white),
-                "Select documents",
-              ),
+              child: Text("Documents"),
             ),
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Cancel", style: TextStyle(color: Colors.white)),
+              child: Text("Cancel"),
             ),
           ],
         );
