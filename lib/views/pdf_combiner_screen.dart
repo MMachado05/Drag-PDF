@@ -11,6 +11,7 @@ import 'package:platform_detail/platform_detail.dart';
 
 import '../core/extensions/dialog_extension.dart';
 import '../view_models/pdf_combiner_view_model.dart';
+import 'components/loading.dart';
 
 class PdfCombinerScreen extends StatefulWidget {
   const PdfCombinerScreen({super.key});
@@ -82,7 +83,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
       body: SafeArea(
         child:
             isLoading()
-                ? Center(child: CircularProgressIndicator())
+                ? const LoadingScreen()
                 : DropTarget(
                   onDragDone: (details) {
                     setState(() {
