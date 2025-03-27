@@ -55,7 +55,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PDF Combiner Example'),
+        title: const Text('Drag PDF'),
         actions: [
           IconButton(
             onPressed: _restart,
