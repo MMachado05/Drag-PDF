@@ -1,5 +1,5 @@
 import 'package:desktop_drop/desktop_drop.dart';
-import 'package:drag_pdf/utils/uint8list_extension.dart';
+import 'package:drag_pdf/utils/extensions/uint8list_extension.dart';
 import 'package:drag_pdf/views/widgets/file_type_icon.dart';
 import 'package:file_magic_number/file_magic_number.dart';
 import 'package:file_picker/file_picker.dart';
@@ -9,7 +9,7 @@ import 'package:path/path.dart' as p;
 import 'package:pdf_combiner/pdf_combiner_delegate.dart';
 import 'package:platform_detail/platform_detail.dart';
 
-import '../dialogs/picker_dialog.dart';
+import '../utils/extensions/dialog_extension.dart';
 import '../view_models/pdf_combiner_view_model.dart';
 
 class PdfCombinerScreen extends StatefulWidget {

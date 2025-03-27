@@ -16,10 +16,10 @@ class PdfCombinerViewModel {
   /// Function to pick PDF files from the device (old method)
   Future<void> pickFiles(FilePickerResult? result) async {
     result ??= await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['pdf', 'jpg', 'png'],
-        allowMultiple: true, // Allow picking multiple files
-      );
+      type: FileType.custom,
+      allowedExtensions: ['pdf', 'jpg', 'png'],
+      allowMultiple: true, // Allow picking multiple files
+    );
     if (result != null && result.files.isNotEmpty) {
       for (var element in result.files) {
         debugPrint("${element.name}, ");
