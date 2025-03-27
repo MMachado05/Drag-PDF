@@ -1,4 +1,4 @@
-import 'package:drag_pdf/utils/theme.dart';
+import 'package:drag_pdf/core/theme.dart';
 import 'package:drag_pdf/views/pdf_combiner_screen.dart';
 import 'package:flutter/material.dart';
 
