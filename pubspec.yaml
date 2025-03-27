@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   desktop_drop: ^0.5.0
   file_magic_number: ^1.2.0
-  file_picker: ^9.2.0
+  file_picker: ^9.2.2
   path_provider: ^2.1.5
   path: ^1.9.0
   permission_handler: ^11.4.0
@@ -44,6 +44,9 @@ dependencies:
   open_file: ^3.5.10
   platform_detail: ^4.2.0
   pdf_combiner: ^4.3.0
+  image_picker: ^1.0.7
+  cunning_document_scanner: ^1.2.3
+  lottie: ^3.3.1
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +74,7 @@ flutter:
   assets:
     - assets/
     - assets/files/
+    - assets/animations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const Color primaryColor = Color(0xFF6200EE);
-  static const Color secondaryColor = Color(0xFF03DAC6);
-  static const Color backgroundColor = Color(0xFFF5F5F5);
-  static const Color surfaceColor = Colors.white;
   static const Color errorColor = Color(0xFFB00020);
 
   static final ThemeData lightTheme = ThemeData(
-    primaryColor: primaryColor,
+    primaryColor: Colors.white,
     colorScheme: const ColorScheme.light(
-      primary: primaryColor,
-      secondary: secondaryColor,
-      surface: surfaceColor,
+      primary: Color(0xFF1D2353),
       error: errorColor,
     ),
-    scaffoldBackgroundColor: backgroundColor,
+    scaffoldBackgroundColor: Color(0xFFAAD1F0),
     appBarTheme: const AppBarTheme(
-      backgroundColor: primaryColor,
+      backgroundColor: Color(0xFF1D2353),
       foregroundColor: Colors.white,
       elevation: 4.0,
       titleTextStyle: TextStyle(
@@ -32,7 +26,7 @@ class AppTheme {
       headlineLarge: TextStyle(
         fontSize: 32.0,
         fontWeight: FontWeight.bold,
-        color: primaryColor,
+        color: Color(0xFF1D2353),
       ),
       headlineMedium: TextStyle(
         fontSize: 24.0,
@@ -41,40 +35,32 @@ class AppTheme {
       ),
     ),
     buttonTheme: const ButtonThemeData(
-      buttonColor: primaryColor,
+      buttonColor: Color(0xFF1D2353),
       textTheme: ButtonTextTheme.primary,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: primaryColor,
+        backgroundColor: Color(0xFF1D2353),
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),
-        textStyle: TextStyle(
-          fontSize: 16.0,
-          fontWeight: FontWeight.bold,
-        ),
+        textStyle: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
       ),
     ),
-    cardTheme: const CardTheme(
-      color: surfaceColor,
-      elevation: 2.0,
-      margin: EdgeInsets.all(8.0),
-    ),
+    cardTheme: const CardTheme(elevation: 2.0, margin: EdgeInsets.all(8.0)),
   );
 
   static final ThemeData darkTheme = ThemeData(
-    primaryColor: primaryColor,
+    primaryColor: Colors.white,
     colorScheme: const ColorScheme.dark(
-      primary: primaryColor,
-      secondary: secondaryColor,
+      primary: Colors.white,
       surface: Color(0xFF1E1E1E),
       error: errorColor,
     ),
-    scaffoldBackgroundColor: const Color(0xFF121212),
+    scaffoldBackgroundColor: const Color(0xFF303030),
     appBarTheme: const AppBarTheme(
-      backgroundColor: Color(0xFF1E1E1E),
+      backgroundColor: Color(0xFF121212),
       foregroundColor: Colors.white,
       elevation: 4.0,
       titleTextStyle: TextStyle(
@@ -99,7 +85,7 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: primaryColor,
+        backgroundColor: Colors.black87,
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8.0)),

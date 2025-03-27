@@ -1,4 +1,4 @@
-import 'package:drag_pdf/utils/theme.dart';
+import 'package:drag_pdf/core/theme.dart';
 import 'package:drag_pdf/views/pdf_combiner_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'PDF Combiner Example',
+      title: 'Drag PDF',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
