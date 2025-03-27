@@ -168,6 +168,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
                                 const Divider(),
                               ],
                               // HERE IS THE INPUT SECTION
+                              const SizedBox(),
                               const Text(
                                 'INPUT FILES',
                                 style: TextStyle(
@@ -260,9 +261,11 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   spacing: 10,
                                   children: [
+                                    const SizedBox(),
                                     ElevatedButton(
                                       onPressed:
                                           _viewModel.selectedFiles.isNotEmpty
@@ -291,6 +294,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
                                               : null,
                                       child: const Text('Images from PDF'),
                                     ),
+                                    const SizedBox(),
                                   ],
                                 ),
                               ),
