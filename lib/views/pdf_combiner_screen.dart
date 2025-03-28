@@ -106,18 +106,33 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
     );
   }
 
-  // Calculate the flex value based on the number of items
+  /// Calculates the flex size for the input files.
+  ///
+  /// This function determines the appropriate size or layout parameters for the input files
+  /// based on the available space, ensuring they are displayed correctly in a flexible layout.
+  ///
+  /// @return Integer value representing the flex size for the input files.
   int calculateFlexInputFiles() =>
       _viewModel.outputFiles.isEmpty ||
               _viewModel.selectedFiles.length <= _viewModel.outputFiles.length
           ? 1
           : 2;
 
-  // Calculate the flex value based on the number of items
+  /// Calculates the flex size for the output files.
+  ///
+  /// This function determines the appropriate size or layout parameters for the output files
+  /// based on the available space, ensuring they are displayed correctly in a flexible layout.
+  ///
+  /// @return Integer value representing the flex size for the output files.
   int calculateFlexOutputFiles() =>
       _viewModel.outputFiles.length <= _viewModel.selectedFiles.length ? 1 : 2;
 
-  /// Function to build menu toolbar
+  /// Creates a widget for the top-right menu.
+  ///
+  /// This function returns a widget that prepares and displays
+  /// the options available in the top-right menu of the application.
+  ///
+  /// @return A `Widget` representing the configured top-right menu.
   List<Widget> menuToolbar() {
     return [
       IconButton(
@@ -143,7 +158,12 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
     ];
   }
 
-  /// Function to build content of output files
+  /// Generates the output file resulting from the combination of the input files.
+  ///
+  /// This function takes the selected input files, processes their content,
+  /// and creates a new file that merges or transforms them according to the application's logic.
+  ///
+  /// @return A widget with the combination of input files into one output file
   Widget getOutputhFiles() {
     return Expanded(
       flex: calculateFlexOutputFiles(),
@@ -188,7 +208,12 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
     );
   }
 
-  /// Function to build content of input files
+  /// Prepares the files selected by the user using File Picker.
+  ///
+  /// This function processes the list of files obtained from the file picker,
+  /// validates their existence, and converts them into a suitable format for further use.
+  ///
+  /// @return A widget with a list of the selected files
   Widget getInputFiles() {
     return Expanded(
       flex: calculateFlexInputFiles(),
@@ -247,7 +272,13 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
     );
   }
 
-  /// Function to build elevated buttons to select interaction with input files
+  /// Creates a bottom bar with buttons that perform actions on the input files.
+  ///
+  /// This function returns a widget representing a bottom bar,
+  /// where each button triggers a specific action related to the input files,
+  /// such as processing, validating, or modifying them.
+  ///
+  /// @return A `Widget` representing the bottom bar with action buttons for input files.
   Widget getBottombarOptions() {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -286,13 +317,23 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
     );
   }
 
-  // Function to pick PDF files from the device
+  /// Allows the user to select a file or scan an image using the camera (on mobile devices).
+  ///
+  /// This function opens a file picker dialog with 2 options if the device is mobile,
+  /// provides the option to scan an image using the camera or another to pick a file.
+  ///
+  /// @return Void
   Future<void> _pickFiles({FilePickerResult? result}) async {
     await _viewModel.pickFiles(result);
     setState(() {});
   }
 
-  // Function to pick PDF files from the device
+  /// Resets the input and output files.
+  ///
+  /// This function clears any previously selected input files and output files,
+  /// returning the application to its initial state, ready for new file selection and processing.
+  ///
+  /// @return Void
   void _restart() {
     _viewModel.restart();
     setState(() {
@@ -301,28 +342,58 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
     _showSnackbarSafely('App restarted!');
   }
 
-  // Function to combine selected PDF files into a single output file
+  /// Combines multiple PDFs into a single output file.
+  ///
+  /// This function takes the selected input PDF files, merges them into a single PDF,
+  /// and saves the combined result to the specified output file location.
+  ///
+  /// @return Void
   Future<void> _combinePdfs() async {
     await _viewModel.combinePdfs(delegate);
   }
-
+  /// Creates a PDF from a mixed set of input files.
+  ///
+  /// This function processes a combination of various input file types (e.g., text, images, or PDFs)
+  /// and generates a new PDF document containing the combined content.
+  ///
+  /// @return Void
   Future<void> _createPdfFromMix() async {
     await _viewModel.createPDFFromDocuments(delegate);
   }
-
+  /// Creates a PDF from a set of image files.
+  ///
+  /// This function takes a list of image files, converts them into PDF pages,
+  /// and generates a new PDF document containing all the images in sequence.
+  ///
+  /// @return Void
   Future<void> _createPdfFromImages() async {
     await _viewModel.createPDFFromImages(delegate);
   }
-
+  /// Extracts images from a PDF and saves them as separate image files.
+  ///
+  /// This function processes a PDF file, extracts each page as an image,
+  /// and saves the images to the specified output location for further use.
+  ///
+  /// @return Void
   Future<void> _createImagesFromPDF() async {
     await _viewModel.createImagesFromPDF(delegate);
   }
-
+  /// Copies the output data to the clipboard.
+  ///
+  /// This function takes the generated output (e.g., file paths, text, or results)
+  /// and copies it to the clipboard, making it available for pasting into other applications.
+  ///
+  /// @return Void
   Future<void> _copyOutputToClipboard(int index) async {
     await _viewModel.copyOutputToClipboard(index);
     _showSnackbarSafely('Output path copied to clipboard');
   }
-
+  /// Opens the output file for viewing or further processing.
+  ///
+  /// This function opens the generated output file (e.g., a PDF, image, or text file)
+  /// using the appropriate application on the device, allowing the user to view or interact with it.
+  ///
+  /// @return Void
   Future<void> _openOutputFile(int index) async {
     if (index < _viewModel.outputFiles.length) {
       final result = await OpenFile.open(_viewModel.outputFiles[index]);
@@ -331,7 +402,12 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
       }
     }
   }
-
+  /// Opens the selected input file for viewing or editing.
+  ///
+  /// This function opens the specified input file (e.g., a document, image, or text file)
+  /// using the appropriate application on the device, allowing the user to view or make changes to it.
+  ///
+  /// @return Void
   Future<void> _openInputFile(int index) async {
     if (index < _viewModel.selectedFiles.length) {
       final result = await OpenFile.open(_viewModel.selectedFiles[index]);
@@ -341,6 +417,12 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
     }
   }
 
+  /// Handles the reordering of files in the list.
+  ///
+  /// This function allows the user to reorder the selected files, updating their sequence
+  /// as per the new order. The file list is then refreshed to reflect the changes.
+  ///
+  /// @return Void
   void _onReorderFiles(int oldIndex, int newIndex) {
     setState(() {
       if (newIndex > oldIndex) {
@@ -350,7 +432,12 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
       _viewModel.selectedFiles.insert(newIndex, file);
     });
   }
-
+  /// Displays a snackbar message safely on the screen.
+  ///
+  /// This function shows a snackbar with a given message, ensuring that it is displayed correctly
+  /// even if the app is in a transient state, such as during navigation or while other UI elements are active.
+  ///
+  /// @return Void
   void _showSnackbarSafely(String message) {
     if (mounted) {
       ScaffoldMessenger.of(
