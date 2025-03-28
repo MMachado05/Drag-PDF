@@ -117,6 +117,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
   int calculateFlexOutputFiles() =>
       _viewModel.outputFiles.length <= _viewModel.selectedFiles.length ? 1 : 2;
 
+  /// Function to build menu toolbar
   List<Widget> menuToolbar() {
     return [
       IconButton(
@@ -142,6 +143,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
     ];
   }
 
+  /// Function to build content of output files
   Widget getOutputhFiles() {
     return Expanded(
       flex: calculateFlexOutputFiles(),
@@ -186,6 +188,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
     );
   }
 
+  /// Function to build content of input files
   Widget getInputFiles() {
     return Expanded(
       flex: calculateFlexInputFiles(),
@@ -244,6 +247,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
     );
   }
 
+  /// Function to build elevated buttons to select interaction with input files
   Widget getBottombarOptions() {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
