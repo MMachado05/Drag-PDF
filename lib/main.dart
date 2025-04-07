@@ -1,9 +1,23 @@
 import 'package:drag_pdf/core/theme.dart';
+import 'package:drag_pdf/utils.dart';
 import 'package:drag_pdf/views/pdf_combiner_screen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+  if(kReleaseMode){
+    await dotenv.load(fileName: '.env');
+    if(checkEnvFile()){
+      await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+   }
+
+  }
   runApp(const MyApp());
+
+
 }
 
 class MyApp extends StatelessWidget {
