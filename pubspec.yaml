@@ -42,11 +42,14 @@ dependencies:
   permission_handler: ^11.4.0
   get: ^4.7.2
   open_file: ^3.5.10
-  platform_detail: ^4.2.0
+  platform_detail: ^5.0.0
   pdf_combiner: ^4.3.0
   image_picker: ^1.0.7
   cunning_document_scanner: ^1.2.3
   lottie: ^3.3.1
+  firebase_core: ^3.13.0
+  firebase_crashlytics: ^4.3.5
+  flutter_dotenv: ^5.2.1
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +75,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - .env
     - assets/
     - assets/files/
     - assets/animations/
