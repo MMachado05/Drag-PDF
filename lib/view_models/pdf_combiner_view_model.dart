@@ -33,13 +33,23 @@ class PdfCombinerViewModel {
     }
   }
 
-  /// Function to pick PDF files from the device
+  /// drag-and-drop functionality for adding files.
+  ///
+  /// This function allows users to drag files into the designated area,
+  /// automatically adding them to the selected file list for further processing.
+  ///
+  /// @return Void
   Future<void> addFilesDragAndDrop(List<DropItem> files) async {
     selectedFiles += files.map((file) => file.path).toList();
     outputFiles = [];
   }
 
-  /// Function to check if the selected files list is empty
+  /// Checks if the collection is empty.
+  ///
+  /// This function verifies whether the collection (e.g., list, set, or map) contains any elements.
+  /// It returns `true` if the collection is empty, and `false` otherwise.
+  ///
+  /// @return `true` if the collection is empty, `false` otherwise.
   bool isEmpty() => selectedFiles.isEmpty;
 
   /// Function to pick PDF files from the device
