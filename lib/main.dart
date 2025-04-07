@@ -1,5 +1,5 @@
 import 'package:drag_pdf/core/theme.dart';
-import 'package:drag_pdf/utils.dart';
+import 'package:drag_pdf/core/utils.dart';
 import 'package:drag_pdf/views/pdf_combiner_screen.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -11,7 +11,7 @@ import 'firebase_options.dart';
 Future<void> main() async {
   if (kReleaseMode) {
     await dotenv.load(fileName: '.env');
-    if (checkEnvFile()) {
+    if (Utils.checkEnvFile()) {
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
