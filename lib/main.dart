@@ -8,16 +8,15 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
-  if(kReleaseMode){
+  if (kReleaseMode) {
     await dotenv.load(fileName: '.env');
-    if(checkEnvFile()){
-      await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-   }
-
+    if (checkEnvFile()) {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    }
   }
   runApp(const MyApp());
-
-
 }
 
 class MyApp extends StatelessWidget {
