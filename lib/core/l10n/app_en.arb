@@ -1,0 +1,19 @@
+{
+  "titleAppBar": "Drag PDF",
+  "success_snackbar_single_file": "File generated successfully: ({path})",
+  "success_snackbar_multiple_files": "({number}) files generated successfully!",
+  "output_files_title": "OUTPUT FILES",
+  "input_files_title": "INPUT FILES",
+  "restart_app_tooltip": "Restart app",
+  "add_new_files_tooltip": "Add new files",
+  "loading_size_message": "Loading size...",
+  "unknown_size_message": "Unknown Size",
+  "file_removed_message": "File ({path}) removed.",
+  "create_pdf_button": "Create PDF",
+  "combine_pdfs_button": "Combine PDFs",
+  "create_pdf_from_images_button": "Create PDF from images",
+  "create_images_from_pdf_button": "Create images from PDF",
+  "snackbar_app_restart": "App restarted successfully!",
+  "snackbar_copy_output_to_clipboard": "Output path copied to clipboard",
+  "failed_open_file": "Failed to open file. Error: ({error})."
+}

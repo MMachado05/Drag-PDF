@@ -10,6 +10,7 @@ import 'package:pdf_combiner/pdf_combiner_delegate.dart';
 import 'package:platform_detail/platform_detail.dart';
 
 import '../core/extensions/dialog_extension.dart';
+import '../core/l10n/app_localizations.dart';
 import '../view_models/pdf_combiner_view_model.dart';
 import 'components/loading.dart';
 
@@ -45,7 +46,15 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
         setState(() {
           _viewModel.outputFiles = paths;
         });
-        _showSnackbarSafely('File/s generated successfully: $paths');
+        String message = AppLocalizations.of(
+          context,
+        )!.success_snackbar_single_file(paths.first);
+        if (paths.length > 1) {
+          message = AppLocalizations.of(
+            context,
+          )!.success_snackbar_multiple_files(paths.length);
+        }
+        _showSnackbarSafely(message);
       },
     );
   }
@@ -55,7 +64,10 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Drag PDF'), actions: menuToolbar()),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.titleAppBar),
+        actions: menuToolbar(),
+      ),
       body: SafeArea(
         child:
             isLoading()
@@ -76,8 +88,10 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
                               if (_viewModel.outputFiles.isNotEmpty) ...[
                                 // HERE IS THE OUTPUT SECTION
                                 const SizedBox(),
-                                const Text(
-                                  'OUTPUT FILES',
+                                Text(
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.output_files_title,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
@@ -88,8 +102,8 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
                               ],
                               // HERE IS THE INPUT SECTION
                               const SizedBox(),
-                              const Text(
-                                'INPUT FILES',
+                              Text(
+                                AppLocalizations.of(context)!.input_files_title,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
@@ -138,7 +152,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
       IconButton(
         onPressed: _restart,
         icon: const Icon(Icons.restart_alt),
-        tooltip: "Restart app",
+        tooltip: AppLocalizations.of(context)!.restart_app_tooltip,
       ),
       IconButton(
         onPressed: () {
@@ -153,7 +167,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
           }
         },
         icon: const Icon(Icons.add),
-        tooltip: "Add new files",
+        tooltip: AppLocalizations.of(context)!.add_new_files_tooltip,
       ),
     ];
   }
@@ -189,11 +203,16 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
                 ),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Text("Loading size...");
+                    return Text(
+                      AppLocalizations.of(context)!.loading_size_message,
+                    );
                   } else if (snapshot.hasError) {
                     return const Icon(Icons.error);
                   } else {
-                    return Text(snapshot.data?.size() ?? "Unknown Size");
+                    return Text(
+                      snapshot.data?.size() ??
+                          AppLocalizations.of(context)!.unknown_size_message,
+                    );
                   }
                 },
               ),
@@ -229,7 +248,9 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
               setState(() {
                 _viewModel.removeFileAt(index);
               });
-              _showSnackbarSafely('File $path removed.');
+              _showSnackbarSafely(
+                AppLocalizations.of(context)!.file_removed_message(path),
+              );
             },
             background: Container(
               color: Colors.red,
@@ -256,11 +277,16 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
                   ),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Text("Loading size...");
+                      return Text(
+                        AppLocalizations.of(context)!.loading_size_message,
+                      );
                     } else if (snapshot.hasError) {
                       return const Icon(Icons.error);
                     } else {
-                      return Text(snapshot.data?.size() ?? "Unknown Size");
+                      return Text(
+                        snapshot.data?.size() ??
+                            AppLocalizations.of(context)!.unknown_size_message,
+                      );
                     }
                   },
                 ),
@@ -290,26 +316,30 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
           ElevatedButton(
             onPressed:
                 _viewModel.selectedFiles.isNotEmpty ? _createPdfFromMix : null,
-            child: const Text('Create PDF'),
+            child: Text(AppLocalizations.of(context)!.create_pdf_button),
           ),
           ElevatedButton(
             onPressed:
                 _viewModel.selectedFiles.isNotEmpty ? _combinePdfs : null,
-            child: const Text('Combine PDFs'),
+            child: Text(AppLocalizations.of(context)!.combine_pdfs_button),
           ),
           ElevatedButton(
             onPressed:
                 _viewModel.selectedFiles.isNotEmpty
                     ? _createPdfFromImages
                     : null,
-            child: const Text('PDF from images'),
+            child: Text(
+              AppLocalizations.of(context)!.create_pdf_from_images_button,
+            ),
           ),
           ElevatedButton(
             onPressed:
                 _viewModel.selectedFiles.isNotEmpty
                     ? _createImagesFromPDF
                     : null,
-            child: const Text('Images from PDF'),
+            child: Text(
+              AppLocalizations.of(context)!.create_images_from_pdf_button,
+            ),
           ),
           const SizedBox(),
         ],
@@ -339,7 +369,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
     setState(() {
       _progress = 0.0;
     });
-    _showSnackbarSafely('App restarted!');
+    _showSnackbarSafely(AppLocalizations.of(context)!.snackbar_app_restart);
   }
 
   /// Combines multiple PDFs into a single output file.
@@ -351,6 +381,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
   Future<void> _combinePdfs() async {
     await _viewModel.combinePdfs(delegate);
   }
+
   /// Creates a PDF from a mixed set of input files.
   ///
   /// This function processes a combination of various input file types (e.g., text, images, or PDFs)
@@ -360,6 +391,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
   Future<void> _createPdfFromMix() async {
     await _viewModel.createPDFFromDocuments(delegate);
   }
+
   /// Creates a PDF from a set of image files.
   ///
   /// This function takes a list of image files, converts them into PDF pages,
@@ -369,6 +401,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
   Future<void> _createPdfFromImages() async {
     await _viewModel.createPDFFromImages(delegate);
   }
+
   /// Extracts images from a PDF and saves them as separate image files.
   ///
   /// This function processes a PDF file, extracts each page as an image,
@@ -378,6 +411,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
   Future<void> _createImagesFromPDF() async {
     await _viewModel.createImagesFromPDF(delegate);
   }
+
   /// Copies the output data to the clipboard.
   ///
   /// This function takes the generated output (e.g., file paths, text, or results)
@@ -386,8 +420,12 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
   /// @return Void
   Future<void> _copyOutputToClipboard(int index) async {
     await _viewModel.copyOutputToClipboard(index);
-    _showSnackbarSafely('Output path copied to clipboard');
+    if (!mounted) return;
+    _showSnackbarSafely(
+      AppLocalizations.of(context)!.snackbar_copy_output_to_clipboard,
+    );
   }
+
   /// Opens the output file for viewing or further processing.
   ///
   /// This function opens the generated output file (e.g., a PDF, image, or text file)
@@ -397,11 +435,14 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
   Future<void> _openOutputFile(int index) async {
     if (index < _viewModel.outputFiles.length) {
       final result = await OpenFile.open(_viewModel.outputFiles[index]);
-      if (result.type != ResultType.done) {
-        _showSnackbarSafely('Failed to open file. Error: ${result.message}');
+      if (mounted && result.type != ResultType.done) {
+        _showSnackbarSafely(
+          AppLocalizations.of(context)!.failed_open_file(result.message),
+        );
       }
     }
   }
+
   /// Opens the selected input file for viewing or editing.
   ///
   /// This function opens the specified input file (e.g., a document, image, or text file)
@@ -411,8 +452,10 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
   Future<void> _openInputFile(int index) async {
     if (index < _viewModel.selectedFiles.length) {
       final result = await OpenFile.open(_viewModel.selectedFiles[index]);
-      if (result.type != ResultType.done) {
-        _showSnackbarSafely('Failed to open file. Error: ${result.message}');
+      if (mounted && result.type != ResultType.done) {
+        _showSnackbarSafely(
+          AppLocalizations.of(context)!.failed_open_file(result.message),
+        );
       }
     }
   }
@@ -432,6 +475,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
       _viewModel.selectedFiles.insert(newIndex, file);
     });
   }
+
   /// Displays a snackbar message safely on the screen.
   ///
   /// This function shows a snackbar with a given message, ensuring that it is displayed correctly
