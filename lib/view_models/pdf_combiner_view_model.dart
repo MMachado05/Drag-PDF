@@ -70,6 +70,7 @@ class PdfCombinerViewModel {
       delegate.onError?.call(
         Exception('You need to select more than one document.'),
       );
+      return;
     }
 
     final directory = await _getOutputDirectory();
