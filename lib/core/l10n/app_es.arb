@@ -23,5 +23,6 @@
   "cancel_button": "Cancelar",
   "select_file_type_title_dialog": "¿Qué tipo de fichero quieres cargar?",
   "images_button": "Imágenes",
-  "documents_button": "Documentos"
+  "documents_button": "Documentos",
+  "not_enough_files_message": "Necesitas al menos 2 ficheros PDF para combinarlos."
 }

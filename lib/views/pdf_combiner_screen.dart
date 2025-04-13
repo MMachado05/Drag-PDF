@@ -319,8 +319,15 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
             child: Text(AppLocalizations.of(context)!.create_pdf_button),
           ),
           ElevatedButton(
-            onPressed:
-                _viewModel.selectedFiles.isNotEmpty ? _combinePdfs : null,
+            onPressed: () {
+              if (_viewModel.selectedFiles.isNotEmpty) {
+                if (_viewModel.selectedFiles.length < 2) {
+                  _showSnackbarSafely(AppLocalizations.of(context)!.not_enough_files_message);
+                } else {
+                  _combinePdfs();
+                }
+              }
+            },
             child: Text(AppLocalizations.of(context)!.combine_pdfs_button),
           ),
           ElevatedButton(

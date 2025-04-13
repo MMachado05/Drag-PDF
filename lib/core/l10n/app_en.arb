@@ -23,5 +23,6 @@
   "cancel_button": "Cancel",
   "select_file_type_title_dialog": "What type of file do you want to load?",
   "images_button": "Images",
-  "documents_button": "Documents"
+  "documents_button": "Documents",
+  "not_enough_files_message": "You need at least 2 PDF files to combine them"
 }

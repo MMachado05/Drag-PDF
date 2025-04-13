@@ -66,13 +66,6 @@ class PdfCombinerViewModel {
 
   /// Function to combine selected PDF files into a single output file
   Future<void> combinePdfs(PdfCombinerDelegate delegate) async {
-    if (selectedFiles.length < 2) {
-      delegate.onError?.call(
-        Exception('You need to select more than one document.'),
-      );
-      return;
-    }
-
     final directory = await _getOutputDirectory();
     String outputFilePath = '${directory?.path}/combined_output.pdf';
 
