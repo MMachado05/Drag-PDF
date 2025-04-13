@@ -196,6 +196,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to open file. Error: ({error}).'**
   String failed_open_file(Object error);
+
+  /// No description provided for @select_files_title_dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Files'**
+  String get select_files_title_dialog;
+
+  /// No description provided for @select_files_content_dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose how you want to add the files'**
+  String get select_files_content_dialog;
+
+  /// No description provided for @select_from_device_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Select from Device'**
+  String get select_from_device_button;
+
+  /// No description provided for @select_from_scanner_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Select from Scanner'**
+  String get select_from_scanner_button;
+
+  /// No description provided for @cancel_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel_button;
+
+  /// No description provided for @select_file_type_title_dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'What type of file do you want to load?'**
+  String get select_file_type_title_dialog;
+
+  /// No description provided for @images_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Images'**
+  String get images_button;
+
+  /// No description provided for @documents_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Documents'**
+  String get documents_button;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

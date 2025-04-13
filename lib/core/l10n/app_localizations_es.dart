@@ -66,4 +66,28 @@ class AppLocalizationsEs extends AppLocalizations {
   String failed_open_file(Object error) {
     return 'Falló al abrir el fichero. Error: ($error).';
   }
+
+  @override
+  String get select_files_title_dialog => 'Selecciona ficheros';
+
+  @override
+  String get select_files_content_dialog => 'Elige cómo quieres añadir los ficheros';
+
+  @override
+  String get select_from_device_button => 'Seleccionar desde el dispositivo';
+
+  @override
+  String get select_from_scanner_button => 'Seleccionar desde el escáner';
+
+  @override
+  String get cancel_button => 'Cancelar';
+
+  @override
+  String get select_file_type_title_dialog => '¿Qué tipo de fichero quieres cargar?';
+
+  @override
+  String get images_button => 'Imágenes';
+
+  @override
+  String get documents_button => 'Documentos';
 }
