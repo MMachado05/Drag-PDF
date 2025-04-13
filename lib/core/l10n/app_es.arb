@@ -15,5 +15,13 @@
   "create_images_from_pdf_button": "Crear imágenes desde PDF",
   "snackbar_app_restart": "App reiniciada con éxito!",
   "snackbar_copy_output_to_clipboard": "Ruta de salida copiada al portapapeles",
-  "failed_open_file": "Falló al abrir el fichero. Error: ({error})."
+  "failed_open_file": "Falló al abrir el fichero. Error: ({error}).",
+  "select_files_title_dialog": "Selecciona ficheros",
+  "select_files_content_dialog": "Elige cómo quieres añadir los ficheros",
+  "select_from_device_button": "Seleccionar desde el dispositivo",
+  "select_from_scanner_button": "Seleccionar desde el escáner",
+  "cancel_button": "Cancelar",
+  "select_file_type_title_dialog": "¿Qué tipo de fichero quieres cargar?",
+  "images_button": "Imágenes",
+  "documents_button": "Documentos"
 }

@@ -4,6 +4,8 @@ import 'package:cunning_document_scanner/cunning_document_scanner.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
+import '../l10n/app_localizations.dart';
+
 extension DialogExtension on BuildContext {
   Future<void> showFilePickerDialog(
     Function(FilePickerResult?) onFilesPicked,
@@ -12,15 +14,19 @@ extension DialogExtension on BuildContext {
       context: this,
       builder: (context) {
         return AlertDialog(
-          title: Text("Select Files"),
-          content: Text("Choose how you want to add the files"),
+          title: Text(AppLocalizations.of(context)!.select_files_title_dialog),
+          content: Text(
+            AppLocalizations.of(context)!.select_files_content_dialog,
+          ),
           actions: [
             TextButton(
               onPressed: () async {
                 Navigator.pop(context);
                 context.showFilePickerWithTypeFileDialog(onFilesPicked);
               },
-              child: Text("Select from Device"),
+              child: Text(
+                AppLocalizations.of(context)!.select_from_device_button,
+              ),
             ),
             TextButton(
               onPressed: () async {
@@ -31,13 +37,15 @@ extension DialogExtension on BuildContext {
                   onFilesPicked(result);
                 }
               },
-              child: Text("Scan Document"),
+              child: Text(
+                AppLocalizations.of(context)!.select_from_scanner_button,
+              ),
             ),
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Cancel"),
+              child: Text(AppLocalizations.of(context)!.cancel_button),
             ),
           ],
         );
@@ -52,7 +60,9 @@ extension DialogExtension on BuildContext {
       context: this,
       builder: (context) {
         return AlertDialog(
-          title: Text("What type of file do you want to load?"),
+          title: Text(
+            AppLocalizations.of(context)!.select_file_type_title_dialog,
+          ),
           actions: [
             TextButton(
               onPressed: () async {
@@ -63,7 +73,7 @@ extension DialogExtension on BuildContext {
                 );
                 onFilesPicked(result);
               },
-              child: Text("Images"),
+              child: Text(AppLocalizations.of(context)!.images_button),
             ),
             TextButton(
               onPressed: () async {
@@ -75,13 +85,13 @@ extension DialogExtension on BuildContext {
                 );
                 onFilesPicked(result);
               },
-              child: Text("Documents"),
+              child: Text(AppLocalizations.of(context)!.documents_button),
             ),
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Cancel"),
+              child: Text(AppLocalizations.of(context)!.cancel_button),
             ),
           ],
         );

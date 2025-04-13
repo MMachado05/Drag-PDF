@@ -15,5 +15,13 @@
   "create_images_from_pdf_button": "Create images from PDF",
   "snackbar_app_restart": "App restarted successfully!",
   "snackbar_copy_output_to_clipboard": "Output path copied to clipboard",
-  "failed_open_file": "Failed to open file. Error: ({error})."
+  "failed_open_file": "Failed to open file. Error: ({error}).",
+  "select_files_title_dialog": "Select Files",
+  "select_files_content_dialog": "Choose how you want to add the files",
+  "select_from_device_button": "Select from Device",
+  "select_from_scanner_button": "Select from Scanner",
+  "cancel_button": "Cancel",
+  "select_file_type_title_dialog": "What type of file do you want to load?",
+  "images_button": "Images",
+  "documents_button": "Documents"
 }
