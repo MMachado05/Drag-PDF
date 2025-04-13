@@ -244,6 +244,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Documents'**
   String get documents_button;
+
+  /// No description provided for @not_enough_files_message.
+  ///
+  /// In en, this message translates to:
+  /// **'You need at least 2 PDF files to combine them'**
+  String get not_enough_files_message;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

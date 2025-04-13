@@ -90,4 +90,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get documents_button => 'Documents';
+
+  @override
+  String get not_enough_files_message => 'You need at least 2 PDF files to combine them';
 }
