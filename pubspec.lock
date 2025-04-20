@@ -92,12 +92,11 @@ packages:
   desktop_drop:
     dependency: "direct main"
     description:
-      path: "packages/desktop_drop"
-      ref: "feature/fixing-web-issue"
-      resolved-ref: "7126c102a52a5144f8df18656d620b2cfbe4f88f"
-      url: "https://github.com/vicajilau/flutter-plugins.git"
-    source: git
-    version: "0.5.1"
+      name: desktop_drop
+      sha256: bd21017e0415632c85f6b813c846bc8c9811742507776dcf6abf91a14d946e98
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.6.0"
   device_info_plus:
     dependency: transitive
     description:
