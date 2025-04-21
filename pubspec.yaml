@@ -44,7 +44,7 @@ dependencies:
   permission_handler: ^11.4.0
   get: ^4.7.2
   open_file: ^3.5.10
-  platform_detail: ^5.0.0
+  platform_detail: ^5.1.0
   pdf_combiner: ^4.3.1
   image_picker: ^1.0.7
   cunning_document_scanner: ^1.2.3
