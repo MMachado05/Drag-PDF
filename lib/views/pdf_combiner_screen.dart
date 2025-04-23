@@ -61,10 +61,13 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
 
   bool isLoading() => _progress != 0.0 && _progress != 1.0;
 
-  bool createPdfButtonEnabled() => _viewModel.selectedFiles.isNotEmpty;
-  bool createImagesFromPdfButtonEnabled() =>
-      _viewModel.selectedFiles.length == 1 &&
-      _viewModel.selectedFiles.first.endsWith('.pdf');
+  bool isPdfButtonDisabled() =>
+      _viewModel.selectedFiles.isEmpty ||
+      (_viewModel.selectedFiles.length == 1 &&
+          _viewModel.selectedFiles.first.endsWith('.pdf'));
+  bool isImagesFromPdfButtonDisabled() =>
+      _viewModel.selectedFiles.length != 1 ||
+      !_viewModel.selectedFiles.first.endsWith('.pdf');
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +125,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
                               ),
                               getInputFiles(),
                               // Buttons Section
-                              getBottombarOptions(),
+                              getBottomBarOptions(),
                               const SizedBox(height: 20),
                             ],
                           ),
@@ -300,7 +303,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
   /// such as processing, validating, or modifying them.
   ///
   /// @return A `Widget` representing the bottom bar with action buttons for input files.
-  Widget getBottombarOptions() {
+  Widget getBottomBarOptions() {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -309,15 +312,12 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
         children: [
           const SizedBox(),
           ElevatedButton(
-            onPressed:
-                _viewModel.selectedFiles.isNotEmpty ? _createPdfFromMix : null,
+            onPressed: isPdfButtonDisabled() ? null : _createPdfFromMix,
             child: Text(AppLocalizations.of(context)!.create_pdf_button),
           ),
           ElevatedButton(
             onPressed:
-                _viewModel.selectedFiles.isNotEmpty
-                    ? _createImagesFromPDF
-                    : null,
+                isImagesFromPdfButtonDisabled() ? null : _createImagesFromPDF,
             child: Text(
               AppLocalizations.of(context)!.create_images_from_pdf_button,
             ),
