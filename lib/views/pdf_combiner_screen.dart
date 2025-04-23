@@ -73,7 +73,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
         title: Text(AppLocalizations.of(context)!.titleAppBar),
         actions: [
           IconButton(
-            onPressed: _restart,
+            onPressed: _viewModel.selectedFiles.isEmpty ? null : _restart,
             icon: const Icon(Icons.restart_alt),
             tooltip: AppLocalizations.of(context)!.restart_app_tooltip,
           ),
