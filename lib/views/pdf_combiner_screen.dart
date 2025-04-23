@@ -361,7 +361,7 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
   ///
   /// @return Void
   Future<void> _pickFiles({FilePickerResult? result}) async {
-    await _viewModel.pickFiles(result);
+    await _viewModel.pickImages(result);
     setState(() {});
   }
 

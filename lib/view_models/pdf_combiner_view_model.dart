@@ -33,6 +33,25 @@ class PdfCombinerViewModel {
     }
   }
 
+  /// Function to pick images from the device
+  Future<void> pickImages(FilePickerResult? result) async {
+    result ??= await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: true, // Allow picking multiple files
+    );
+    if (result != null && result.files.isNotEmpty) {
+      for (var element in result.files) {
+        debugPrint("${element.name}, ");
+      }
+      final files =
+          result.files
+              .where((file) => file.path != null)
+              .map((file) => File(file.path!))
+              .toList();
+      _addFiles(files);
+    }
+  }
+
   /// drag-and-drop functionality for adding files.
   ///
   /// This function allows users to drag files into the designated area,
@@ -100,9 +119,6 @@ class PdfCombinerViewModel {
 
   /// Function to create a PDF file from a list of images
   Future<void> createImagesFromPDF(PdfCombinerDelegate delegate) async {
-    if (selectedFiles.length > 1) {
-      throw Exception('Only you can select a single document.');
-    }
     final directory = await _getOutputDirectory();
     final outputFilePath = '${directory?.path}';
     await PdfCombiner.createImageFromPDF(
