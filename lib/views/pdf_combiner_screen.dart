@@ -61,12 +61,23 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
 
   bool isLoading() => _progress != 0.0 && _progress != 1.0;
 
+  bool createPdfButtonEnabled() => _viewModel.selectedFiles.isNotEmpty;
+  bool createImagesFromPdfButtonEnabled() =>
+      _viewModel.selectedFiles.length == 1 &&
+      _viewModel.selectedFiles.first.endsWith('.pdf');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.titleAppBar),
-        actions: menuToolbar(),
+        actions: [
+          IconButton(
+            onPressed: _restart,
+            icon: const Icon(Icons.restart_alt),
+            tooltip: AppLocalizations.of(context)!.restart_app_tooltip,
+          ),
+        ],
       ),
       body: SafeArea(
         child:
@@ -117,6 +128,21 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
                           ),
                 ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          if (PlatformDetail.isMobile) {
+            context.showFilePickerDialog((FilePickerResult? result) {
+              if (result != null) {
+                _pickFiles(result: result);
+              }
+            });
+          } else {
+            _pickFiles();
+          }
+        },
+        tooltip: AppLocalizations.of(context)!.add_new_files_tooltip,
+        child: const Icon(Icons.add),
+      ),
     );
   }
 
@@ -140,37 +166,6 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
   /// @return Integer value representing the flex size for the output files.
   int calculateFlexOutputFiles() =>
       _viewModel.outputFiles.length <= _viewModel.selectedFiles.length ? 1 : 2;
-
-  /// Creates a widget for the top-right menu.
-  ///
-  /// This function returns a widget that prepares and displays
-  /// the options available in the top-right menu of the application.
-  ///
-  /// @return A `Widget` representing the configured top-right menu.
-  List<Widget> menuToolbar() {
-    return [
-      IconButton(
-        onPressed: _restart,
-        icon: const Icon(Icons.restart_alt),
-        tooltip: AppLocalizations.of(context)!.restart_app_tooltip,
-      ),
-      IconButton(
-        onPressed: () {
-          if (PlatformDetail.isMobile) {
-            context.showFilePickerDialog((FilePickerResult? result) {
-              if (result != null) {
-                _pickFiles(result: result);
-              }
-            });
-          } else {
-            _pickFiles();
-          }
-        },
-        icon: const Icon(Icons.add),
-        tooltip: AppLocalizations.of(context)!.add_new_files_tooltip,
-      ),
-    ];
-  }
 
   /// Generates the output file resulting from the combination of the input files.
   ///
@@ -319,27 +314,6 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
             child: Text(AppLocalizations.of(context)!.create_pdf_button),
           ),
           ElevatedButton(
-            onPressed: () {
-              if (_viewModel.selectedFiles.isNotEmpty) {
-                if (_viewModel.selectedFiles.length < 2) {
-                  _showSnackbarSafely(AppLocalizations.of(context)!.not_enough_files_message);
-                } else {
-                  _combinePdfs();
-                }
-              }
-            },
-            child: Text(AppLocalizations.of(context)!.combine_pdfs_button),
-          ),
-          ElevatedButton(
-            onPressed:
-                _viewModel.selectedFiles.isNotEmpty
-                    ? _createPdfFromImages
-                    : null,
-            child: Text(
-              AppLocalizations.of(context)!.create_pdf_from_images_button,
-            ),
-          ),
-          ElevatedButton(
             onPressed:
                 _viewModel.selectedFiles.isNotEmpty
                     ? _createImagesFromPDF
@@ -379,16 +353,6 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
     _showSnackbarSafely(AppLocalizations.of(context)!.snackbar_app_restart);
   }
 
-  /// Combines multiple PDFs into a single output file.
-  ///
-  /// This function takes the selected input PDF files, merges them into a single PDF,
-  /// and saves the combined result to the specified output file location.
-  ///
-  /// @return Void
-  Future<void> _combinePdfs() async {
-    await _viewModel.combinePdfs(delegate);
-  }
-
   /// Creates a PDF from a mixed set of input files.
   ///
   /// This function processes a combination of various input file types (e.g., text, images, or PDFs)
@@ -397,16 +361,6 @@ class _PdfCombinerScreenState extends State<PdfCombinerScreen> {
   /// @return Void
   Future<void> _createPdfFromMix() async {
     await _viewModel.createPDFFromDocuments(delegate);
-  }
-
-  /// Creates a PDF from a set of image files.
-  ///
-  /// This function takes a list of image files, converts them into PDF pages,
-  /// and generates a new PDF document containing all the images in sequence.
-  ///
-  /// @return Void
-  Future<void> _createPdfFromImages() async {
-    await _viewModel.createPDFFromImages(delegate);
   }
 
   /// Extracts images from a PDF and saves them as separate image files.
